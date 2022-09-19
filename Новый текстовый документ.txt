@@ -1,0 +1,58 @@
+        String[][] array_1 = {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        };
+
+        };
+        for (int j = 0; j < array_1.length ; ++j) {
+            for (int i = 0; i < array_1[j].length; ++i) {
+
+                    System.out.println(array_1[i].toString());
+                }
+            }
+        }
+        try {
+            try{
+                int[][] array_1;
+                int result = method_array(array_1);
+                System.out.println("Результат: " + result);
+            }
+            catch (MyArraySizeException e)
+            {
+                System.out.println("Размер массива должен быть 4х4!");
+            }
+        }
+        catch (MyArrayDataException e)
+        {
+            System.out.println("Неверное значение в массиве");
+            System.out.println("Ошибка в ячейке: " + e.i + "x" + e.j);
+        }
+    }
+    
+    public static int method_array(int[][] arr) throws MyArrayDataException, MyArrayDataException{
+        int count = 0;
+        if (arr.length != 4)
+        {
+            throw new MyArraySizeException();
+        }
+        else {
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i].length != 4) {
+                    throw new MyArraySizeException();
+                }
+                else {
+                    for (int j = 0; j < arr[i].length; j++) {
+                        try {
+                            count = count + Integer.parseInt(String.valueOf(arr[i][j]));
+                        } catch (NumberFormatException e) {
+                            throw new MyArrayDataException(i, j);
+                        }
+                    }
+                }
+            }
+        }
+        return count;
+    }
+}
